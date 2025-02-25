@@ -23,8 +23,8 @@ static int borderpx = 1;
  * pseudo transparency fixes coordinates to the screen origin
  */
 /* static const char *bgfile = "/home/anon/Library/images/illustrations/unknown/chainsawman/makima.ff"; */
-static const char *bgfile = "/home/anon/Library/images/art/background.ff";
-static const int pseudotransparency = -1;
+static const char *bgfile = "/home/anon/Library/images/art/background.ffs";
+static const int pseudotransparency = 0;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -115,28 +115,54 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
+/* static const char *colorname[] = { */
+/*   /1* 8 normal colors *1/ */
+/*   [0] = "#1d2021", /1* hard contrast: #1d2021 / soft contrast: #32302f *1/ */
+/*   [1] = "#ea6962", /1* red     *1/ */
+/*   [2] = "#a9b665", /1* green   *1/ */
+/*   [3] = "#e78a4e", /1* yellow  *1/ */
+/*   [4] = "#7daea3", /1* blue    *1/ */
+/*   [5] = "#d3869b", /1* magenta *1/ */
+/*   [6] = "#89b482", /1* cyan    *1/ */
+/*   [7] = "#d4be98", /1* white   *1/ */
+
+/*   /1* 8 bright colors *1/ */
+/*   [8]  = "#928374", /1* black   *1/ */
+/*   [9]  = "#ea6962", /1* red     *1/ */
+/*   [10] = "#a9b665", /1* green   *1/ */
+/*   [11] = "#d8a657", /1* yellow  *1/ */
+/*   [12] = "#7daea3", /1* blue    *1/ */
+/*   [13] = "#d3869b", /1* magenta *1/ */
+/*   [14] = "#89b482", /1* cyan    *1/ */
+/*   [15] = "#d4be98", /1* white   *1/ */
+/* }; */
+
 static const char *colorname[] = {
-  /* 8 normal colors */
-  [0] = "#1d2021", /* hard contrast: #1d2021 / soft contrast: #32302f */
-  [1] = "#ea6962", /* red     */
-  [2] = "#a9b665", /* green   */
-  [3] = "#e78a4e", /* yellow  */
-  [4] = "#7daea3", /* blue    */
-  [5] = "#d3869b", /* magenta */
-  [6] = "#89b482", /* cyan    */
-  [7] = "#d4be98", /* white   */
+	/* 8 normal colors */
+	"#45475A",
+	"#F38BA8",
+	"#A6E3A1",
+	"#F9E2AF",
+	"#89B4FA",
+	"#F5C2E7",
+	"#94E2D5",
+	"#BAC2DE",
 
-  /* 8 bright colors */
-  [8]  = "#928374", /* black   */
-  [9]  = "#ea6962", /* red     */
-  [10] = "#a9b665", /* green   */
-  [11] = "#d8a657", /* yellow  */
-  [12] = "#7daea3", /* blue    */
-  [13] = "#d3869b", /* magenta */
-  [14] = "#89b482", /* cyan    */
-  [15] = "#d4be98", /* white   */
+	/* 8 bright colors */
+	"#585B70",
+	"#F38BA8",
+	"#A6E3A1",
+	"#F9E2AF",
+	"#89B4FA",
+	"#F5C2E7",
+	"#94E2D5",
+	"#A6ADC8",
+
+	[256] = "#CDD6F4", /* default foreground colour */
+	[257] = "#1E1E2E", /* default background colour */
+	[258] = "#F5E0DC", /*575268*/
+
 };
-
 /* Terminal colors (16 first used in escape sequence) */
 /* static const char *colorname[] = { */
 /*   /1* 8 normal colors *1/ */
@@ -159,15 +185,18 @@ static const char *colorname[] = {
 /*   [15]= "#fbf1c7", /1* white   *1/ */
 /* }; */
 
-
+unsigned int defaultfg = 256;
+unsigned int defaultbg = 257;
+unsigned int defaultcs = 258;
+static unsigned int defaultrcs = 258;
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor, selection
  */
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
-unsigned int defaultcs = 15;
-unsigned int defaultrcs = 256;
+/* unsigned int defaultfg = 7; */
+/* unsigned int defaultbg = 0; */
+/* unsigned int defaultcs = 15; */
+/* unsigned int defaultrcs = 256; */
 
 unsigned int selectionbg = 7;
 unsigned int selectionfg = 0;
