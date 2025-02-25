@@ -1,0 +1,11 @@
+--- st.c
++++ st.c
+@@ -2498,7 +2405,7 @@ check_control_code:
+ 
+ 	if (term.c.x+width > term.col) {
+ 		tnewline(1);
+-		gp = &TLINE(term.c.y)[term.c.x];
++		gp = &term.line[term.c.y][term.c.x];
+ 	}
+ 
+ 	tsetchar(u, &term.c.attr, term.c.x, term.c.y);
