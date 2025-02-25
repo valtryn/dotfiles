@@ -1,0 +1,70 @@
+{
+	"id": "valt",
+	"layer": "bottom",
+	"position": "top",
+	"height": 20,
+	"spacing": 10,
+
+	"hyprland/workspaces": {
+		"active-only": false,
+		"all-outputs": true,
+	},
+
+	"hyprland/window": {
+		"format": "  {title}",
+		"icon": false,
+		"icon-size": 16,
+		"max-length": 140,
+	},
+
+	"clock": {
+		"interval": 1,
+		"format": "[date: {:%m/%d/%Y %H:%M:%S}]",
+		"tooltip": false,
+	},
+
+	"cpu": {
+		"interval": 1,
+		"format": "[cpu: {}%]",
+		"max-length": 25,
+		"tooltip": false,
+	},
+
+	"memory": {
+		"interval": 1,
+		"format": "[mem: {used:0.1f}G/{total:0.1f}]",
+		"max-length": 25,
+		"tooltip": false,
+	},
+
+	"network": {
+		"interval": 3,
+		"interface": "enp34s0",
+		"format-ethernet": "[up: {bandwidthUpBytes} - down: {bandwidthDownBytes}]",
+		"tooltip-format-disconnected": "DISCONNECTED",
+		"max-length": 34,
+		"tooltip": false,
+	},
+
+	"pulseaudio": {
+		"format": "[volume: {volume}%]",
+		"format-muted": "[volume: MUTE]",
+		"on-click": "pavucontrol"
+	},
+
+	"modules-center": [
+	],
+
+	"modules-left": [
+		"hyprland/workspaces",
+		"hyprland/window"
+	],
+
+	"modules-right": [
+		"cpu",
+		"memory",
+		"pulseaudio",
+		"clock"
+	],
+
+}
