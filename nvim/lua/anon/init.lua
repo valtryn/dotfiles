@@ -1,48 +1,100 @@
 -- [[ THEME ]]
-
--- No clown fiesta
--- require("no-clown-fiesta").setup({
---   transparent = false, -- Enable this to disable the bg color
---   styles = {
---     -- You can set any of the style values specified for `:h nvim_set_hl`
---     comments = {},
---     functions = {},
---     keywords = {},
---     lsp = { underline = true },
---     match_paren = {},
---     type = { bold = true },
---     variables = {},
---   },
--- })
-vim.cmd[[colorscheme austere]]
--- ++ Gruber Darker ++
--- require("gruber-darker").setup({
---   bold = true,
---     undercurl = true,
---     underline = true,
---     invert = { signs   = false, tabline  =  false, visual    = false, },
---     italic = { strings = false, comments =  false, operators = false, folds = false, }
--- })
--- vim.cmd.colorscheme 'gruber-darker'
--- cursor settings
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
--- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#FFDD33', bg = '#FFDD33', bold = false })
--- make everything transparent
--- require("transparent").setup({ -- Optional, you don't have to run setup.
---     groups = {                 -- table: default groups
---         'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
---         'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
---         'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
---         'SignColumn', 'CursorLineNr', 'EndOfBuffer',
---     },
---     extra_groups = {},   -- table: additional groups that should be cleared
---     exclude_groups = {}, -- table: groups you don't want to clear
--- })
--- vim.g.transparent_enabled = true
+-- vim.cmd.colorscheme "catppuccin-mocha"
+local color = require("catppuccin.palettes").get_palette "mocha"
 
+require("catppuccin").setup({
+    flavour = "mocha", -- latte, frappe, macchiato, mocha
+    background = { -- :h background
+        dark = "mocha",
+    },
+    transparent_background = true, -- disables setting the background color.
+    show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+    term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+    dim_inactive = {
+        enabled = false, -- dims the background color of inactive window
+        shade = "dark",
+        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+    },
+    no_italic = true, -- Force no italic
+    no_bold = false, -- Force no bold
+    no_underline = false, -- Force no underline
+    styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+        comments = { "italic" }, -- Change the style of comments
+        conditionals = { "italic" },
+        loops = {},
+        functions = {},
+        keywords = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+        -- miscs = {}, -- Uncomment to turn off hard-coded styles
+    },
+    color_overrides = {
+      all = {
+        base      = "#010101",
+        mantle    = "#181825",
+        crust     = "#11111b",
+      },
+    },
+    custom_highlights = {
+      -- PREPROCESSOR 
+      Include = { fg = color.overlay0 },
+      PreProc = { fg = color.overlay0 },
+      cDefine = { fg = color.overlay0 },
+      Macro   = { fg = color.overlay1 },
 
--- ++ GIT SIGNS ++
+      -- PRIMITIVE TYPES 
+      Number = { fg = color.text },
+      -- DERIVED TYPES 
+      Structure = { fg = color.subtext0 },
+      Type = { fg = color.subtext0 },
+      Constant = { fg = color.overlay0 },
+      String = { fg = color.text },
+
+      --  FUNCTION
+      ['@property'] = { fg = color.subtext0 },
+      ['@parameter'] = { fg = color.text },
+      ['@function.builtin'] = { fg = color.subtext1 },
+      Function = { fg = color.subtext1 },
+      -- CONTROL FLOW
+      Conditional = { fg = color.overlay2 },
+      Label       = { fg = color.overlay2 },
+      Statement   = { fg = color.overlay2 },
+      -- LOOP
+      Repeat = { fg = color.overlay2 },
+      -- OPERATOR 
+      Operator = { fg = color.overlay0 },
+      -- I DON'T KNOW
+      ['@type.builtin'] = { fg = color.subtext0 },
+      Todo = { fg = color.text, bg = "#010101", bold = false },
+      Special = { fg = color.subtext0 },
+      StorageClass = { fg = color.subtext1 },
+    },
+    default_integrations = true,
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = false,
+        mini = {
+            enabled = true,
+            indentscope_color = "",
+        },
+        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+    },
+})
+-- vim.cmd[[colorscheme austere]]
+-- setup must be called before loading
+vim.cmd.colorscheme "catppuccin"
+
+-- GIT SIGNS
 require("gitsigns").setup({
     signs = {
       add = { text = '+' },
@@ -52,7 +104,7 @@ require("gitsigns").setup({
       changedelete = { text = '~' },
     },
 })
--- ++ Lualine
+-- Lualine
 require("lualine").setup({
     options = {
       theme = 'auto',
@@ -62,7 +114,7 @@ require("lualine").setup({
     },
 })
 
--- [[ TELESCOPE ]]
+-- TELESCOPE
 require('telescope').setup {
   defaults = {
     mappings = {
@@ -100,7 +152,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- [[ CONFIGURE TREESITTER ]]
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'html', 'css', 'scss', 'json', 'javascript' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'vimdoc', 'vim', 'html', 'css', 'scss', 'json', 'javascript' },
   auto_install = true,
   highlight = { enable = false },
   indent = { enable = false, disable = { 'python' } },
@@ -201,21 +253,6 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  html = {},
-  cssls = {},
-  gopls = {
-    settings = {
-      goimports = true,
-      gofumpt = true,
-    }
-  },
-  pyright = {},
-  -- flake8 = {},
-  quick_lint_js = {},
-  svelte = {},
-  -- prettier = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -369,23 +406,6 @@ vim.keymap.set({ 'n', 't' }, '<A-v>',
     require("nvterm.terminal").toggle "vertical"
   end
 )
-
-
--- [[ NULL-LS ]]
-local null_ls = require('null-ls')
-local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
-null_ls.setup {
-  sources = {
-    formatting.prettier.with({ extra_args = { '--tab-width=4', '--use-tab' } }),
-    formatting.gofumpt,
-    formatting.goimports,
-    -- diagnostics.eslint_d,
-    diagnostics.flake8,
-    -- null_ls.builtins.completion.spell,
-  },
-}
-
-
+--
 -- [[ MISC ]]
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)

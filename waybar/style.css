@@ -28,6 +28,10 @@ window#waybar {
     background-color: @base;
 }
 
+#workspaces button.empty {
+    opacity: 0.5;
+}
+
 #workspaces button.urgent {
     color: @red;
     border: 1px solid red;
