@@ -9,7 +9,7 @@ require("catppuccin").setup({
     background = { -- :h background
         dark = "mocha",
     },
-    transparent_background = true, -- disables setting the background color.
+    transparent_background = false , -- disables setting the background color.
     show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
     term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
     dim_inactive = {
@@ -42,12 +42,14 @@ require("catppuccin").setup({
         crust     = "#11111b",
       },
     },
+    -- NOTE: Use :Inspect to know the key
     custom_highlights = {
       -- PREPROCESSOR 
       Include = { fg = color.overlay0 },
       PreProc = { fg = color.overlay0 },
       cDefine = { fg = color.overlay0 },
       Macro   = { fg = color.overlay1 },
+      Character = { fg = color.text },
 
       -- PRIMITIVE TYPES 
       Number = { fg = color.text },
@@ -71,10 +73,12 @@ require("catppuccin").setup({
       -- OPERATOR 
       Operator = { fg = color.overlay0 },
       -- I DON'T KNOW
+      ['@constant.builtin'] = { fg = color.overlay0 },
       ['@type.builtin'] = { fg = color.subtext0 },
       Todo = { fg = color.text, bg = "#010101", bold = false },
       Special = { fg = color.subtext0 },
       StorageClass = { fg = color.subtext1 },
+      MatchParen = { fg = color.red, bg = "#010101", bold = true },
     },
     default_integrations = true,
     integrations = {
@@ -345,7 +349,7 @@ require('smart-term-esc').setup {
 local mark = require('harpoon.mark')
 local ui = require('harpoon.ui')
 
-vim.keymap.set('n', '<leader>ha', mark.add_file)
+vim.keymap.set('n', '<F3>', mark.add_file)
 vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu)
 
 vim.keymap.set('n', '<C-a>', function()
@@ -374,7 +378,6 @@ require("nvterm").setup({
                 col = 0.25,
                 width = 0.5,
                 height = 0.5,
-                border = "none",
             },
             horizontal = { location = "rightbelow", split_ratio = .3, },
             vertical   = { location = "rightbelow", split_ratio = .5 },

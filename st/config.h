@@ -23,7 +23,8 @@ static int borderpx = 1;
  * pseudo transparency fixes coordinates to the screen origin
  */
 /* static const char *bgfile = "/home/anon/Library/images/illustrations/unknown/chainsawman/makima.ff"; */
-static const char *bgfile = "/home/anon/Library/images/art/background.ffs";
+/* static const char *bgfile = "/home/anon/Library/images/art/output.ff"; */
+static const char *bgfile = "/home/anon/Library/images/wallpaper/all.ff";
 static const int pseudotransparency = 0;
 
 /*
