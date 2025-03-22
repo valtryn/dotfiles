@@ -9,7 +9,7 @@ require("catppuccin").setup({
     background = { -- :h background
         dark = "mocha",
     },
-    transparent_background = false , -- disables setting the background color.
+    transparent_background = true, -- disables setting the background color.
     show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
     term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
     dim_inactive = {
@@ -143,16 +143,17 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
-vim.keymap.set('n', '<leader>f', function()
+vim.keymap.set('n', '<leader>sf', function()
   require('telescope.builtin').find_files({
     no_ignore = true
   })
 end, { desc = 'Search files' })
--- vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files,  { desc = '[S]earch [F]iles'        })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags,   { desc = '[S]earch [H]elp'         })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sl', require('telescope.builtin').live_grep,   { desc = '[S]earch by [G]rep'      })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics'  })
+
+vim.keymap.set('n', '<leader>ss', require('telescope.builtin').lsp_document_symbols,  { desc = '[S]earch [S]ymbols'        })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags,             { desc = '[S]earch [H]elp'         })
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string,           { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sl', require('telescope.builtin').live_grep,             { desc = '[S]earch by [G]rep'      })
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics,           { desc = '[S]earch [D]iagnostics'  })
 -- [[ CONFIGURE TREESITTER ]]
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
@@ -235,6 +236,7 @@ local on_attach = function(_, bufnr)
 
     -- See `:help K` for why this keymap
     nmap('M', vim.lsp.buf.hover, 'Hover Documentation')
+    -- nmap('K', vim.diagnostic.open_float, 'Hover Documentation')
     nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
     -- Lesser used LSP functionality
@@ -300,9 +302,10 @@ cmp.setup {
   window = {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
+    -- diagnostic = cmp.config.window.bordered();
   },
   experimental = {
-    ghost_text = false -- this feature conflict with copilot.vim's preview.
+    ghost_text = true -- this feature conflict with copilot.vim's preview.
   },
   snippet = {
     expand = function(args)
@@ -412,3 +415,21 @@ vim.keymap.set({ 'n', 't' }, '<A-v>',
 --
 -- [[ MISC ]]
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+
+-- require("nvim-tree").setup({
+--   sort = {
+--     sorter = "case_sensitive",
+--   },
+--   view = {
+--     width = 30,
+--   },
+--   renderer = {
+--     group_empty = true,
+--   },
+--   filters = {
+--     dotfiles = true,
+--   },
+-- })

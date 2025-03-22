@@ -5,7 +5,8 @@ vim.keymap.set('i', '<C-q>', '<Esc>')
 vim.keymap.set('v', 'z', ":m '>+1<CR>gv=gv",                { desc = 'move up selected text'          })
 vim.keymap.set('v', 'x', ":m '<-2<CR>gv=gv",                { desc = 'move down selected text'        })
 vim.keymap.set('n', 'J', 'mzJ`z',                           { desc = 'appends the current line below' })
-vim.keymap.set('n', 'M', 'K',              	   { noremap = true, silent = true })
+vim.keymap.set('n', 'K', 'mz-J`z',                           { desc = 'appends the current line below' })
+-- vim.keymap.set('n', 'M', 'K',              	   { noremap = true, silent = true })
 -- vim.keymap.set({ 'n', 'v' }, 'K', '<Nop>', 	   { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>r', ':set wrap!<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
@@ -128,6 +129,7 @@ require("lazy").setup({
         end,
         opts = {}
     },
+    'nvim-tree/nvim-tree.lua',
 })
 
 require('anon')
