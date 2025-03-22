@@ -5,7 +5,11 @@ vim.keymap.set('i', '<C-q>', '<Esc>')
 vim.keymap.set('v', 'z', ":m '>+1<CR>gv=gv",                { desc = 'move up selected text'          })
 vim.keymap.set('v', 'x', ":m '<-2<CR>gv=gv",                { desc = 'move down selected text'        })
 vim.keymap.set('n', 'J', 'mzJ`z',                           { desc = 'appends the current line below' })
-vim.keymap.set('n', 'K', 'mz-J`z',                           { desc = 'appends the current line below' })
+vim.keymap.set('n', 'K', 'mz-J`z',                          { desc = 'appends the current line below' })
+vim.keymap.set('n', 'q', '<nop>',                  { noremap = true })
+vim.keymap.set('n', 'Q', 'q',                      { noremap = true, desc = 'Record macro' })
+vim.keymap.set('n', '<A-q>', 'Q',                  { noremap = true, desc = 'Replay last register' })
+-- vim.api.nvim_set_keymap('n', '<F3>', '@q',                  { noremap = true, silent = true })
 -- vim.keymap.set('n', 'M', 'K',              	   { noremap = true, silent = true })
 -- vim.keymap.set({ 'n', 'v' }, 'K', '<Nop>', 	   { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>r', ':set wrap!<CR>', { noremap = true, silent = true })
@@ -130,6 +134,9 @@ require("lazy").setup({
         opts = {}
     },
     'nvim-tree/nvim-tree.lua',
+    'romgrk/barbar.nvim',
+    'nvim-tree/nvim-web-devicons',
+
 })
 
 require('anon')

@@ -143,7 +143,7 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
-vim.keymap.set('n', '<leader>sf', function()
+vim.keymap.set('n', '<leader>f', function()
   require('telescope.builtin').find_files({
     no_ignore = true
   })
@@ -236,7 +236,7 @@ local on_attach = function(_, bufnr)
 
     -- See `:help K` for why this keymap
     nmap('M', vim.lsp.buf.hover, 'Hover Documentation')
-    -- nmap('K', vim.diagnostic.open_float, 'Hover Documentation')
+    nmap('<', vim.diagnostic.open_float, 'Hover Documentation')
     nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
     -- Lesser used LSP functionality
@@ -428,8 +428,31 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 --   },
 --   renderer = {
 --     group_empty = true,
---   },
+--   }
 --   filters = {
 --     dotfiles = true,
 --   },
 -- })
+
+require('lazy').setup {
+  {'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      -- 'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {
+      icons_enabled = false,
+      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+      -- animation = true,
+      -- insert_at_start = true,
+      -- …etc.
+    },
+    version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  },
+}
+
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+map('n', '<S-Tab>', '<Cmd>BufferPrevious<CR>', opts)
+map('n', '<Tab>', '<Cmd>BufferNext<CR>', opts)

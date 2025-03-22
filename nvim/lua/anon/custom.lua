@@ -27,4 +27,4 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
   pattern = "*.h",
   command = "set filetype=c"
 })
-vim.api.nvim_set_keymap('n', '<F2>', ':Inspect<CR>', { noremap = true})
+-- vim.api.nvim_set_keymap('n', '<F2>', ':Inspect<CR>', { noremap = true})
