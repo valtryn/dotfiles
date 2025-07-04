@@ -5,7 +5,10 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Iosevka Term:style=Regular:pixelsize=14:antialias=true:hinting=false:autohint=false:rgba=none";
+/* static char *font = "Iosevka Term:style=Regular:pixelsize=14:antialias=true:hinting=false:autohint=false:rgba=none"; */
+
+/* static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true"; */
+static char *font = "Cozette:style=HiDpi:size=9.5";
 
 /* Spare fonts */
 static char *font2[] = {
@@ -14,6 +17,10 @@ static char *font2[] = {
 	"Symbols Nerd Font Mono:pixelsize=9:antialias=false:autohint=false",
 	"Noto Sans Symbols:pixelsize=9:antialias=false:autohint=false",
 };
+
+int disablebold = 1;
+int disableitalic = 1;
+int disableroman = 0;
 
 static int borderpx = 1;
 
@@ -24,8 +31,8 @@ static int borderpx = 1;
  */
 /* static const char *bgfile = "/home/anon/Library/images/illustrations/unknown/chainsawman/makima.ff"; */
 /* static const char *bgfile = "/home/anon/Library/images/art/output.ff"; */
-static const char *bgfile = "/home/anon/Library/images/wallpaper/all.ff";
-static const int pseudotransparency = 0;
+static const char *bgfile = "/home/anon/Library/images/wallpaper/wall.ff";
+static const int pseudotransparency = 1;
 
 /*
  * What program is execed by st depends of these precedence rules:

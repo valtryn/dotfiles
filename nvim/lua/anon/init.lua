@@ -18,7 +18,7 @@ require("catppuccin").setup({
         percentage = 0.15, -- percentage of the shade to apply to the inactive window
     },
     no_italic = true, -- Force no italic
-    no_bold = false, -- Force no bold
+    no_bold = true, -- Force no bold
     no_underline = false, -- Force no underline
     styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
         comments = { "italic" }, -- Change the style of comments
@@ -121,6 +121,11 @@ require("lualine").setup({
 -- TELESCOPE
 require('telescope').setup {
   defaults = {
+    pickers = {
+      find_files = {
+        find_command = { "fd", "--type", "f", "--color", "never", "--no-require-git" }
+      }
+    },
     mappings = {
       i = {
         ['<C-u>'] = false,
@@ -145,7 +150,7 @@ end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>f', function()
   require('telescope.builtin').find_files({
-    no_ignore = true
+    no_ignore = false
   })
 end, { desc = 'Search files' })
 
@@ -176,7 +181,7 @@ require('nvim-treesitter.configs').setup {
       lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
+        -- ['aa'] = '@parameter.outer',
         ['ia'] = '@parameter.inner',
         ['af'] = '@function.outer',
         ['if'] = '@function.inner',
@@ -305,7 +310,7 @@ cmp.setup {
     -- diagnostic = cmp.config.window.bordered();
   },
   experimental = {
-    ghost_text = true -- this feature conflict with copilot.vim's preview.
+    ghost_text = false -- this feature conflict with copilot.vim's preview.
   },
   snippet = {
     expand = function(args)
@@ -434,25 +439,30 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 --   },
 -- })
 
-require('lazy').setup {
-  {'romgrk/barbar.nvim',
-    dependencies = {
-      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-      -- 'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
-    },
-    init = function() vim.g.barbar_auto_setup = false end,
-    opts = {
-      icons_enabled = false,
-      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
-      -- animation = true,
-      -- insert_at_start = true,
-      -- …etc.
-    },
-    version = '^1.0.0', -- optional: only update when a new 1.x version is released
-  },
-}
+-- require('lazy').setup {
+--   {'romgrk/barbar.nvim',
+--     dependencies = {
+--       'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+--       -- 'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+--     },
+--     init = function() vim.g.barbar_auto_setup = false end,
+--     opts = {
+--       icons_enabled = false,
+--       -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+--       -- animation = true,
+--       -- insert_at_start = true,
+--       -- …etc.
+--     },
+--     version = '^1.0.0', -- optional: only update when a new 1.x version is released
+--   },
+-- }
 
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-map('n', '<S-Tab>', '<Cmd>BufferPrevious<CR>', opts)
-map('n', '<Tab>', '<Cmd>BufferNext<CR>', opts)
+-- local map = vim.api.nvim_set_keymap
+-- local opts = { noremap = true, silent = true }
+-- map('n', '<S-Tab>', '<Cmd>BufferPrevious<CR>', opts)
+-- map('n', '<Tab>', '<Cmd>BufferNext<CR>', opts)
+--
+
+-- Aligns to 1 character
+vim.keymap.set('v', 'aa', '<Plug>(EasyAlign)=', { noremap = false, silent = true })
+vim.keymap.set('v', 'f', '<Plug>(EasyAlign)', { noremap = false, silent = true })

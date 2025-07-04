@@ -133,9 +133,10 @@ require("lazy").setup({
         end,
         opts = {}
     },
-    'nvim-tree/nvim-tree.lua',
-    'romgrk/barbar.nvim',
-    'nvim-tree/nvim-web-devicons',
+    -- 'nvim-tree/nvim-tree.lua',
+    -- 'romgrk/barbar.nvim',
+    -- 'nvim-tree/nvim-web-devicons',
+    'junegunn/vim-easy-align',
 
 })
 

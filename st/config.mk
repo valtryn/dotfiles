@@ -19,7 +19,9 @@ INCS = -I$(X11INC) \
 LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft \
        `$(PKG_CONFIG) --libs fontconfig` \
        `$(PKG_CONFIG) --libs freetype2`
-CFLAGS = -O2 -march=native
+
+CC = gcc
+CFLAGS = -O3 -ffast-math -march=native -mtune=native -msse -msse2 -mavx -ftree-vectorize
 # flags
 STCPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
 STCFLAGS = $(INCS) $(STCPPFLAGS) $(CPPFLAGS) $(CFLAGS)
